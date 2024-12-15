@@ -1,10 +1,7 @@
 {% include "header.html" %}
 
-<!-- Page Header-->
-<header
-  class="masthead"
-  style="background-image: url('../static/assets/img/home-bg.jpg')"
->
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('../static/assets/img/home-bg.jpg')">
   <div class="container position-relative px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
       <div class="col-md-10 col-lg-8 col-xl-7">
@@ -22,11 +19,10 @@
   <div class="row gx-4 gx-lg-5 justify-content-center">
     <div class="col-md-10 col-lg-8 col-xl-7">
 
-      <!-- التحقق من وجود منشورات -->
-
-        <!-- عرض المنشورات -->
-        {% for post in all_posts %}
+      <!-- Check if there are any posts -->
+      {% for post in all_posts %}
         <div class="post-preview">
+          <!-- Link to the individual post page -->
           <a href="{{ url_for('show_post', post_id=post.id) }}">
             <h2 class="post-title">{{ post.title }}</h2>
             <h3 class="post-subtitle">{{ post.subtitle }}</h3>
@@ -37,7 +33,7 @@
             on {{ post.date }}
           </p>
 
-          <!-- زر الحذف إذا كان المستخدم إداريًا -->
+          <!-- Delete button if the user is an admin -->
           {% if current_user.id == 1 %}
           <div class="d-flex justify-content-end mb-4">
             <a class="btn btn-dark text-uppercase" href="{{ url_for('delete_post', post_id=post.id) }}">Delete Post</a>
@@ -45,9 +41,9 @@
           {% endif %}
         </div>
         <hr class="my-4" />
-        {% endfor %}
+      {% endfor %}
 
-      <!-- زر إنشاء منشور جديد إذا كان المستخدم إداريًا -->
+      <!-- Button to create a new post if the user is an admin -->
       {% if current_user.id == 1 %}
       <div class="d-flex justify-content-end mb-4">
         <a class="btn btn-primary float-right" href="{{ url_for('add_new_post') }}">Create New Post</a>
@@ -59,3 +55,4 @@
 </div>
 
 {% include "footer.html" %}
+
